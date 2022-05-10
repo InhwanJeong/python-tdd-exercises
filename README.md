@@ -45,3 +45,8 @@ Or alternatively with [nose](https://nose.readthedocs.org):
 ```
 $ nosetests exercises.py
 ```
+
+```
+coverage run -m pytest exercises.py
+coverall
+```

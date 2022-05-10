@@ -31,7 +31,13 @@ def is_english_vowel(c):
     Returns True if c is an english vowel
     and False otherwise.
     """
-    return None
+    vowel_list = ['a', 'e', 'i', 'o', 'u', 'y',
+                  'A', 'E', 'I', 'O', 'U', 'Y']
+
+    if c in vowel_list:
+        return True
+
+    return False
 
 
 def test_is_english_vowel():
@@ -58,7 +64,16 @@ def count_num_vowels(s):
     """
     Returns the number of vowels in a string s.
     """
-    return None
+
+    count = 0
+    vowel_list = ['a', 'e', 'i', 'o', 'u', 'y',
+                  'A', 'E', 'I', 'O', 'U', 'Y']
+
+    for char in s:
+        if char in vowel_list:
+            count += 1
+
+    return count
 
 
 def test_count_num_vowels():
@@ -80,7 +95,14 @@ def histogram(l):
     """
     Converts a list of integers into a simple string histogram.
     """
-    return None
+    result = ""
+
+    for item in l:
+        for i in range(item):
+            result += "#"
+        result += '\n'
+
+    return result[:-1]
 
 
 def test_histogram():
@@ -94,7 +116,10 @@ def get_word_lengths(s):
     Returns a list of integers representing
     the word lengths in string s.
     """
-    return None
+
+    result = [len(i) for i in s.split()]
+
+    return result
 
 
 def test_get_word_lengths():
@@ -109,6 +134,13 @@ def find_longest_word(s):
     Returns the longest word in string s.
     In case there are several, return the first.
     """
+
+    len_list = [len(i) for i in s.split()]
+
+    for string in s.split():
+        if len(string) == max(len_list):
+            return string
+
     return None
 
 
@@ -126,7 +158,15 @@ def validate_dna(s):
     Return True if the DNA string only contains characters
     a, c, t, or g (lower or uppercase). False otherwise.
     """
-    return None
+
+    s = s.lower()
+    dna_string = ['a', 'c', 't', 'g']
+
+    for char in s:
+        if char not in dna_string:
+            return False
+
+    return True
 
 
 def test_validate_dna():
@@ -143,7 +183,18 @@ def base_pair(c):
     of the base pair. If the base is not recognized,
     return 'unknown'.
     """
-    return None
+    c = c.lower()
+    base_pair_dict = {
+        'a': 't',
+        't': 'a',
+        'c': 'g',
+        'g': 'c',
+    }
+
+    if c in base_pair_dict:
+        return base_pair_dict[c]
+
+    return 'unknown'
 
 
 def test_base_pair():
@@ -166,7 +217,8 @@ def transcribe_dna_to_rna(s):
     Return string s with each letter T replaced by U.
     Result is always uppercase.
     """
-    return None
+
+    return s.upper().replace('T', 'U')
 
 
 def test_transcribe_dna_to_rna():
@@ -181,7 +233,19 @@ def get_complement(s):
     Return the DNA complement in uppercase
     (A -> T, T-> A, C -> G, G-> C).
     """
-    return None
+    result = ""
+
+    base_pair_dict = {
+        'a': 't',
+        't': 'a',
+        'c': 'g',
+        'g': 'c',
+    }
+
+    for char in s.lower():
+        result += base_pair_dict[char]
+
+    return result.upper()
 
 
 def test_get_complement():
@@ -196,7 +260,20 @@ def get_reverse_complement(s):
     Return the reverse complement of string s
     (complement reversed in order).
     """
-    return None
+
+    result = ""
+
+    base_pair_dict = {
+        'a': 't',
+        't': 'a',
+        'c': 'g',
+        'g': 'c',
+    }
+
+    for char in s.lower():
+        result += base_pair_dict[char]
+
+    return result.upper()[::-1]
 
 
 def test_get_reverse_complement():
@@ -210,7 +287,10 @@ def remove_substring(substring, string):
     """
     Returns string with all occurrences of substring removed.
     """
-    return None
+
+    result = string.replace(substring, "")
+
+    return result
 
 
 def test_remove_substring():
@@ -228,7 +308,13 @@ def get_position_indices(triplet, dna):
     in a DNA sequence. We start counting from 0
     and jump by 3 characters from one position to the next.
     """
-    return None
+    result = []
+
+    for i in range(0, len(dna), 3):
+        if triplet == dna[i:i+3]:
+            result.append(i/3)
+
+    return result
 
 
 def test_get_position_indices():
@@ -247,7 +333,22 @@ def get_3mer_usage_chart(s):
     The list is alphabetically sorted by the name
     of the 3-mer.
     """
-    return None
+    from collections import defaultdict
+
+    temp_dict = defaultdict(int)
+    dna_3_mer = [s[i:i+3] for i in range(0, len(s)-2)]
+    dna_3_mer.sort()
+    [temp_dict[item] for item in dna_3_mer]
+
+    for item in dna_3_mer:
+        temp_dict[item] += 1
+
+    result = []
+
+    for key, value in temp_dict.items():
+        result.append((key, value))
+
+    return result
 
 
 def test_get_3mer_usage_chart():
@@ -278,7 +379,13 @@ def read_column(file_name, column_number):
     Reads column column_number from file file_name
     and returns the values as floats in a list.
     """
-    return None
+    with open(file_name, 'r') as f:
+        data = f.read()
+
+        data = data.split('\n')
+        column_data = [float(item.split()[column_number-1]) for item in data]
+
+    return column_data
 
 
 def test_read_column():
@@ -302,7 +409,7 @@ def test_read_column():
     assert read_column(file_name, 2) == [0.1, 0.2, 0.3, 0.4, 0.5, 0.6]
 
     # we remove the temporary file
-    os.unlink(file_name)
+    # os.unlink(file_name)
 
 
 # ------------------------------------------------------------------------------
@@ -316,7 +423,20 @@ def character_statistics(file_name):
     Use the isalpha() method to figure out
     whether the character is in the alphabet.
     """
-    return None
+    from collections import defaultdict
+
+    temp_dict = defaultdict(int)
+
+    with open(file_name, 'r') as f:
+        data = f.read()
+        for char in data:
+            if not char.isalpha():
+                continue
+
+            char = char.lower()
+            temp_dict[char] += 1
+
+    return (max(temp_dict, key=temp_dict.get), min(temp_dict, key=temp_dict.get))
 
 
 def test_character_statistics():
@@ -371,7 +491,7 @@ Be all my sins remember'd."""
     assert (most_abundant, least_abundant) == ('e', 'q')
 
     # we remove the temporary file
-    os.unlink(file_name)
+    # os.unlink(file_name)
 
 
 # ------------------------------------------------------------------------------
