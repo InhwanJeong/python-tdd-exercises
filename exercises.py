@@ -141,7 +141,6 @@ def find_longest_word(s):
         if len(string) == max(len_list):
             return string
 
-    return None
 
 
 def test_find_longest_word():
@@ -514,4 +513,5 @@ def pythagorean_triples(n):
 # ------------------------------------------------------------------------------
 
 def test_pythagorean_triples():
-    pass  # so far we do not test anything, check also test coverage
+    assert pythagorean_triples(5) == [(3, 4, 5)]
+    assert pythagorean_triples(12) == [(3, 4, 5), (6, 8, 10)]
