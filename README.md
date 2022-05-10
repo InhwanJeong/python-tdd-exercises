@@ -3,7 +3,7 @@
 ## Make these badges green
 
 [![Build Status](https://app.travis-ci.com/InhwanJeong/python-tdd-exercises.svg?branch=master)](https://app.travis-ci.com/InhwanJeong/python-tdd-exercises)
-[![Coverage Status](https://coveralls.io/repos/github/InhwanJeong/python-tdd-exercises/badge.svg?branch=master)](https://coveralls.io/github/InhwanJeong/python-tdd-exercises?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/InhwanJeong/python-tdd-exercises/badge.svg?branch=master&service=github)](https://coveralls.io/github/InhwanJeong/python-tdd-exercises?branch=master&service=github)
 
 After you fork, edit this `README.md` and rename "bast" to your GitHub username
 or namespace to make the badges point to your fork.
